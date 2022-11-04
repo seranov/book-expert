@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.7.xsd">
+
+    <changeSet author="sv.novikov" id="load-data-user-table">
+        <loadData catalogName="user"
+                  commentLineStartsWith="//"
+                  file="load-data-user-table.csv"
+                  quotchar="'"
+                  relativeToChangelogFile="true"
+                  tableName="user"
+                  usePreparedStatements="true">
+            <column header="username"
+                    name="username"
+                    type="STRING"/>
+            <column header="password"
+                    name="password"
+                    type="STRING"/>
+            <column header="roles"
+                    name="roles"
+                    type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
+

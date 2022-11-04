@@ -12,15 +12,6 @@ spring:
     password: 0
     driver-class-name: org.postgresql.Driver
   r2dbc:
-    pool:
-      enabled: true
-      initial-size: 5
-      max-size: 10
-      validation-query: SELECT
-    url: r2dbc:postgresql://localhost:5432/postgres
-    schema: book_expert
-    username: postgres
-    password: 0
   jpa:
     open-in-view: false
     show-sql: false
@@ -30,8 +21,11 @@ spring:
   liquibase:
     drop-first: false
     change-log: classpath:db/changelog/db.changelog-master.xml
-    enabled: false
-    default-schema: public
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: 0
+    default-schema: book_expert
 
 management:
   endpoints:
@@ -44,7 +38,29 @@ logging:
     org:
       springframework:
         r2dbc: DEBUG
+    ru:
+      seranov:
+        bookexpert: DEBUG
 
 # Приложение
 app:
   version: '@project.version@'
+  database:
+    postgresBookExpert:
+      pool:
+        enabled: true
+        initial-size: 5
+        max-size: 10
+        validation-query: SELECT
+      url: r2dbc:postgresql://localhost:5432/postgres
+      schema: book_expert
+      username: postgres
+      password: 0
+    mongoBooks:
+      pool:
+        enabled: true
+        initial-size: 6
+        max-size: 11
+        validation-query: SELECT
+      url: mongodb://localhost:27017/postgres
+      schema: books

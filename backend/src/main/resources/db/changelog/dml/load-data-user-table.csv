@@ -1,0 +1,3 @@
+username,password,roles
+'user','password','USER'
+'admin','password','ADMIN'
