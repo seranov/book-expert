@@ -1,0 +1,48 @@
+# Сервер
+server:
+  port: 8080
+
+# Spring
+spring:
+  application:
+    name: "Book Expert Backend"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 0
+    driver-class-name: org.postgresql.Driver
+  r2dbc:
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 10
+    url: r2dbc:postgresql://postgres:postgres@localhost:5432/postgres
+    username: postgres
+    password: 0
+  jpa:
+    open-in-view: false
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    drop-first: false
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: false
+    default-schema: public
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc: DEBUG
+
+# Приложение
+app:
+  version: '@project.version@'
