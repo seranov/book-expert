@@ -15,6 +15,7 @@ repositories {
 }
 
 ext {
+    set('grpcStarterVersion', "4.9.0")
     set('lombokMapstructVersion', "0.2.0")
     set('mapstructVersion', "1.5.3.Final")
     set('commonsLang3Version', "3.12.0")
@@ -53,6 +54,7 @@ dependencies {
     implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
     implementation "org.postgresql:postgresql:${postgresqlVersion}"
     implementation "org.postgresql:r2dbc-postgresql:${postgresqlR2dbcVersion}"
+    implementation "io.github.lognet:grpc-spring-boot-starter:${grpcStarterVersion}"
     compileOnly "org.projectlombok:lombok"
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor "org.projectlombok:lombok"

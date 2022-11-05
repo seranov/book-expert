@@ -16,8 +16,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import ru.seranov.bookexpert.backend.service.UserDetailsServiceDb;
-import ru.seranov.bookexpert.backend.service.UserService;
+import ru.seranov.bookexpert.backend.service.db.UserDetailsServiceDb;
+import ru.seranov.bookexpert.backend.service.db.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -38,6 +38,7 @@ public class BackendWebSecurityConfigurerAdapter {
                 .authorizeHttpRequests((requests) -> requests
                         .antMatchers("/", "/open").permitAll()
                         .antMatchers("/actuator").permitAll()
+                        .antMatchers("/scripts").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

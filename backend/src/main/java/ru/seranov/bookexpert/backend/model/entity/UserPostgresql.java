@@ -1,4 +1,4 @@
-package ru.seranov.bookexpert.backend.entity;
+package ru.seranov.bookexpert.backend.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

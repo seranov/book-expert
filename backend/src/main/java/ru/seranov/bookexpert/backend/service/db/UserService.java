@@ -1,7 +1,7 @@
-package ru.seranov.bookexpert.backend.service;
+package ru.seranov.bookexpert.backend.service.db;
 
 import lombok.NonNull;
-import ru.seranov.bookexpert.core.dto.User;
+import ru.seranov.bookexpert.core.model.dto.User;
 
 import java.util.Optional;
 

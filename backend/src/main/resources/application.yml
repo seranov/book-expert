@@ -21,6 +21,9 @@ spring:
       user: postgres
       password: 0
       default-schema: book_expert
+      
+grpc:
+  port: 6565
 
 management:
   endpoints:

@@ -1,4 +1,4 @@
-package ru.seranov.bookexpert.core.dto;
+package ru.seranov.bookexpert.core.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;

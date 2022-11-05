@@ -15,8 +15,8 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import ru.seranov.bookexpert.backend.config.AppConfigProperties;
-import ru.seranov.bookexpert.backend.entity.UserPostgresql;
-import ru.seranov.bookexpert.backend.service.PrefillDb;
+import ru.seranov.bookexpert.backend.model.entity.UserPostgresql;
+import ru.seranov.bookexpert.backend.service.db.PrefillDb;
 
 @Slf4j
 @SpringBootApplication(exclude = {

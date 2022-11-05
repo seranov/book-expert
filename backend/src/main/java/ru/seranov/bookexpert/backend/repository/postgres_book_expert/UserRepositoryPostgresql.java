@@ -4,8 +4,8 @@ import lombok.NonNull;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import reactor.core.publisher.Mono;
-import ru.seranov.bookexpert.backend.entity.UserAny;
-import ru.seranov.bookexpert.backend.entity.UserPostgresql;
+import ru.seranov.bookexpert.backend.model.entity.UserAny;
+import ru.seranov.bookexpert.backend.model.entity.UserPostgresql;
 
 public interface UserRepositoryPostgresql extends R2dbcRepository<UserPostgresql, Long> {
     @Query("SELECT * FROM book_expert.user WHERE username = :username AND password = :password")

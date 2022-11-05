@@ -1,4 +1,4 @@
-package ru.seranov.bookexpert.backend.service;
+package ru.seranov.bookexpert.backend.service.db;
 
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.seranov.bookexpert.core.dto.User;
+import ru.seranov.bookexpert.core.model.dto.User;
 
 import java.util.Optional;
 

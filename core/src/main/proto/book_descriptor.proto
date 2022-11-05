@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package ru.seranov.bookexpert.core.model.grpc;
+
+message BookDescriptor {
+  string name = 1;
+  string description = 2;
+}

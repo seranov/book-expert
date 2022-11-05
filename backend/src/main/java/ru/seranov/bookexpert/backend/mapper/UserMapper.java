@@ -7,8 +7,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.seranov.bookexpert.backend.entity.UserAny;
-import ru.seranov.bookexpert.core.dto.User;
+import ru.seranov.bookexpert.backend.model.entity.UserAny;
+import ru.seranov.bookexpert.core.model.dto.User;
 
 @Mapper
 public interface UserMapper {

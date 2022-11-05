@@ -1,14 +1,14 @@
-package ru.seranov.bookexpert.backend.service;
+package ru.seranov.bookexpert.backend.service.db;
 
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.seranov.bookexpert.backend.entity.UserAny;
+import ru.seranov.bookexpert.backend.model.entity.UserAny;
 import ru.seranov.bookexpert.backend.repository.mongodb_books.UserRepositoryMongodb;
 import ru.seranov.bookexpert.backend.repository.postgres_book_expert.UserRepositoryPostgresql;
-import ru.seranov.bookexpert.core.dto.User;
+import ru.seranov.bookexpert.core.model.dto.User;
 
 import java.util.List;
 import java.util.Objects;
