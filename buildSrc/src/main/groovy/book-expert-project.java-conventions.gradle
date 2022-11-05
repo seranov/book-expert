@@ -15,6 +15,7 @@ repositories {
 }
 
 ext {
+    set('lombokMapstructVersion', "0.2.0")
     set('mapstructVersion', "1.5.3.Final")
     set('commonsLang3Version', "3.12.0")
     set('postgresqlVersion', "42.5.0")
@@ -52,9 +53,10 @@ dependencies {
     implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
     implementation "org.postgresql:postgresql:${postgresqlVersion}"
     implementation "org.postgresql:r2dbc-postgresql:${postgresqlR2dbcVersion}"
-    compileOnly 'org.projectlombok:lombok'
+    compileOnly "org.projectlombok:lombok"
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'

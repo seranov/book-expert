@@ -16,6 +16,7 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.r2dbc.dialect.PostgresDialect;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 import org.springframework.r2dbc.core.DatabaseClient;
+import ru.seranov.bookexpert.backend.repository.postgres_book_expert.UserRepository;
 
 import static io.r2dbc.spi.ConnectionFactoryOptions.PASSWORD;
 import static io.r2dbc.spi.ConnectionFactoryOptions.USER;
@@ -23,7 +24,7 @@ import static io.r2dbc.spi.ConnectionFactoryOptions.USER;
 @Configuration
 @EnableR2dbcRepositories(
         entityOperationsRef = "postgresBookExpertEntityTemplate",
-        basePackages = {"ru.seranov.bookexpert.backend.repository.postgres_book_expert"})
+        basePackageClasses = {UserRepository.class})
 @EnableConfigurationProperties
 public class PostgresBookExpertR2dbcConfiguration {
     @NonNull

@@ -6,26 +6,21 @@ server:
 spring:
   application:
     name: "Book Expert Backend"
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: 0
-    driver-class-name: org.postgresql.Driver
   r2dbc:
-  jpa:
-    open-in-view: false
-    show-sql: false
-    generate-ddl: false
-    hibernate:
-      ddl-auto: validate
-  liquibase:
-    drop-first: false
-    change-log: classpath:db/changelog/db.changelog-master.xml
-    enabled: true
-    url: jdbc:postgresql://localhost:5432/postgres
-    user: postgres
-    password: 0
-    default-schema: book_expert
+    jpa:
+      open-in-view: false
+      show-sql: false
+      generate-ddl: false
+      hibernate:
+        ddl-auto: validate
+    liquibase:
+      drop-first: false
+      change-log: classpath:db/changelog/db.changelog-master.xml
+      enabled: true
+      url: jdbc:postgresql://localhost:5432/postgres
+      user: postgres
+      password: 0
+      default-schema: book_expert
 
 management:
   endpoints:
