@@ -18,7 +18,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class UserPostgresql implements UserAny {
     @Id
     private UUID id;
 

@@ -1,6 +1,5 @@
 package ru.seranov.bookexpert.backend;
 
-import io.r2dbc.spi.ConnectionFactory;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,11 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.lang.Nullable;
-import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import ru.seranov.bookexpert.backend.config.AppConfigProperties;
-import ru.seranov.bookexpert.backend.entity.User;
+import ru.seranov.bookexpert.backend.entity.UserPostgresql;
+import ru.seranov.bookexpert.backend.service.PrefillDb;
 
 @Slf4j
 @SpringBootApplication(exclude = {
@@ -28,17 +27,23 @@ import ru.seranov.bookexpert.backend.entity.User;
         MongoDataAutoConfiguration.class
 })
 @ConfigurationPropertiesScan(basePackageClasses = {AppConfigProperties.class})
-@EntityScan(basePackageClasses = {User.class})
-public class BookExpertApplication {
+@EntityScan(basePackageClasses = {UserPostgresql.class})
+public class BookExpertApplication implements ApplicationListener<ContextRefreshedEvent> {
+    @NonNull
+    private final PrefillDb prefillDb;
+
+    @Autowired
+    public BookExpertApplication(final @NonNull PrefillDb prefillDb) {
+        this.prefillDb = prefillDb;
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(BookExpertApplication.class, args);
     }
 
-    @Autowired
-    @Bean
-    @Nullable
-    ConnectionFactoryInitializer initializer(@NonNull final ConnectionFactory connectionFactory) {
-        log.info("Инициализация фабрики подключений {}", connectionFactory);
-        return null;
+    @Override
+    public void onApplicationEvent(@NonNull final ContextRefreshedEvent event) {
+        log.info("Контекст приложениия обновлён");
+        prefillDb.prefill();
     }
 }

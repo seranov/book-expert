@@ -3,11 +3,11 @@ package ru.seranov.bookexpert.backend.mapper;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.seranov.bookexpert.backend.entity.UserAny;
 import ru.seranov.bookexpert.core.dto.User;
 
 @Mapper
@@ -16,11 +16,7 @@ public interface UserMapper {
     UserMapper USER_MAPPER = Mappers.getMapper(UserMapper.class);
 
     @Nullable
-    User toDto(@Nullable final ru.seranov.bookexpert.backend.entity.User entity);
-
-    @Mapping(target = "id", expression = "java(null)")
-    @Nullable
-    ru.seranov.bookexpert.backend.entity.User toEntity(@Nullable final User dto);
+    User toDto(@Nullable final UserAny entity);
 
     @Nullable
     default UserDetails toUserDetails(@Nullable final User dto, @NonNull final PasswordEncoder passwordEncoder) {
