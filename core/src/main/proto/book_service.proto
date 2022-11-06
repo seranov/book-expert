@@ -6,5 +6,5 @@ import "book_descriptor.proto";
 
 service BookService {
   rpc add(ru.seranov.bookexpert.core.model.grpc.BookDescriptor)
-      returns (ru.seranov.bookexpert.core.model.grpc.BookDescriptor) {}
+      returns (ru.seranov.bookexpert.core.model.grpc.BookAddResponse) {}
 }

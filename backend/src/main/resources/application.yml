@@ -1,26 +1,29 @@
 # Сервер
 server:
   port: 8081
+  compression:
+    enabled: true
 
 # Spring
 spring:
   application:
     name: "Book Expert Backend"
-  r2dbc:
-    jpa:
-      open-in-view: false
-      show-sql: false
-      generate-ddl: false
-      hibernate:
-        ddl-auto: validate
-    liquibase:
-      drop-first: false
-      change-log: classpath:db/changelog/db.changelog-master.xml
-      enabled: true
-      url: jdbc:postgresql://localhost:5432/postgres
-      user: postgres
-      password: 0
-      default-schema: book_expert
+  jpa:
+    open-in-view: false
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+  jackson:
+    time-zone: UTC
+  liquibase:
+    drop-first: false
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: 0
+    default-schema: book_expert
 
 grpc:
   port: 6565

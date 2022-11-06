@@ -16,8 +16,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import ru.seranov.bookexpert.backend.service.db.UserDetailsServiceDb;
 import ru.seranov.bookexpert.backend.service.db.UserService;
+import ru.seranov.bookexpert.backend.service.security.UserDetailsServiceDb;
 
 @Configuration
 @EnableWebSecurity
@@ -35,13 +35,17 @@ public class BackendWebSecurityConfigurerAdapter {
     @NonNull
     public SecurityFilterChain filterChain(@NonNull final HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
+                .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .antMatchers("/", "/open/**").permitAll()
                         .antMatchers("/actuator/**").permitAll()
                         .antMatchers("/scripts/**").permitAll()
+                        .antMatchers("/api/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin((form) -> form
+                .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
                 )
