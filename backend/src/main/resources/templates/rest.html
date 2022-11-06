@@ -3,31 +3,44 @@
 
 <head>
     <title>Book add test</title>
+
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/scripts/rest.js"></script>
 </head>
 
 <body>
 
-<a href="hello.html">hello</a>
+<div th:insert="~{header :: navigate-links}"></div>
 
-<div>Request:</div>
-<textarea id="book-add-request" cols="80" rows="10">
-    {
-        "id": "request_id",
-        "name": "book name",
-        "description": "import description"
-    }
-</textarea>
-
-<div>
-    <button onclick="hello();">Hello</button>
-    <button onclick="add();">Add</button>
+<div id="main-content" class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div>Request:</div>
+            <textarea id="book-add-request" cols="80" rows="10">
+            {
+                "id": "request_id",
+                "name": "book name",
+                "description": "import description"
+            }
+        </textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button onclick="hello();">Hello</button>
+        </div>
+        <div class="col-md-6">
+            <button onclick="add();">Add</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div>Response:</div>
+            <textarea id="book-add-response" cols="80" rows="10"></textarea>
+        </div>
+    </div>
 </div>
-
-<div>Response:</div>
-<textarea id="book-add-response" cols="80" rows="10"></textarea>
-
-<script src="webjars/jquery/jquery.min.js"></script>
-<script src="scripts/rest.js"></script>
 
 </body>
 

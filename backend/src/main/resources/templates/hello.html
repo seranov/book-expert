@@ -6,21 +6,8 @@
 </head>
 
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 
-<p>
-    <a href="rest">Rest test</a>
-</p>
-<p>
-    <a href="websocket">WebSocket test</a>
-</p>
-<p>
-    <a href="react">React test</a>
-</p>
-
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<div th:insert="~{header :: navigate-links}"></div>
 
 </body>
 

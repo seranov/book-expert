@@ -14,6 +14,10 @@ public class BackendMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("classpath:/css/")
+                .resourceChain(true)
+                .addResolver(new EncodedResourceResolver());
         registry.addResourceHandler("/scripts/**")
                 .addResourceLocations("classpath:/scripts/")
                 .resourceChain(true)
@@ -33,6 +37,7 @@ public class BackendMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/rest").setViewName("rest");
+        registry.addViewController("/websocket").setViewName("websocket");
         registry.addViewController("/login").setViewName("login");
     }
 }
