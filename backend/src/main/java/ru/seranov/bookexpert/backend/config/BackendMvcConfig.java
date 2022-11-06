@@ -22,6 +22,7 @@ public class BackendMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/hello").setViewName("hello");
+        registry.addViewController("/rest").setViewName("rest");
         registry.addViewController("/login").setViewName("login");
     }
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import ru.seranov.bookexpert.backend.service.book.BookService;
 import ru.seranov.bookexpert.core.model.grpc.BookDescriptorOuterClass;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 @Slf4j
 public class BookServiceRestController {
     @NonNull
@@ -24,14 +25,15 @@ public class BookServiceRestController {
         this.bookService = bookService;
     }
 
-    @PostMapping(path = "/hello", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/hello", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> hello() {
         return ResponseEntity.ok("Hello!");
     }
 
 
     @PostMapping(path = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> ping(@RequestBody @NonNull final BookDescriptorOuterClass.BookDescriptor request) {
+    public ResponseEntity<BookDescriptorOuterClass.BookAddResponse> add(
+            @RequestBody @NonNull final BookDescriptorOuterClass.BookDescriptor request) {
         return ResponseEntity.ok(bookService.add(request));
     }
 }

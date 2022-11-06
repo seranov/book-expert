@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Book add test</title>
+</head>
+
+<body>
+
+<a href="hello.html">hello</a>
+
+<div>Request:</div>
+<textarea id="book-add-request" cols="80" rows="10">
+    {
+        "id": "request_id",
+        "name": "book name",
+        "description": "import description"
+    }
+</textarea>
+
+<div>
+    <button onclick="hello();">Hello</button>
+    <button onclick="add();">Add</button>
+</div>
+
+<div>Response:</div>
+<textarea id="book-add-response" cols="80" rows="10"></textarea>
+
+<script src="scripts/jquery-3.6.1.js"></script>
+<script src="scripts/rest.js"></script>
+
+</body>
+
+</html>
