@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import ru.seranov.bookexpert.backend.aop.LogMethodCall;
 import ru.seranov.bookexpert.backend.model.websocket.BookAddWebsocketRequest;
 import ru.seranov.bookexpert.backend.model.websocket.BookAddWebsocketResponse;
 import ru.seranov.bookexpert.backend.service.book.BookService;
@@ -24,6 +25,7 @@ public class BookServiceWebsocketController {
         this.bookService = bookService;
     }
 
+    @LogMethodCall
     @MessageMapping("/add")
     @SendTo("/topic/book_add_requested")
     @NonNull

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.seranov.bookexpert.backend.aop.LogMethodCall;
 import ru.seranov.bookexpert.backend.model.rest.BookAddRestRequest;
 import ru.seranov.bookexpert.backend.model.rest.BookAddRestResponse;
 import ru.seranov.bookexpert.backend.service.book.BookService;
@@ -36,7 +37,7 @@ public class BookServiceRestController {
         return ResponseEntity.ok("Hello!");
     }
 
-
+    @LogMethodCall
     @PostMapping(path = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookAddRestResponse> add(@RequestBody @NonNull final BookAddRestRequest request) {
         final BookAddRequest dto = BOOK_ADD_REQUEST_MAPPER.toDto(request);

@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.seranov.bookexpert.backend.aop.LogMethodCall;
 import ru.seranov.bookexpert.backend.service.book.BookService;
 import ru.seranov.bookexpert.core.model.dto.BookAddRequest;
 import ru.seranov.bookexpert.core.model.dto.BookAddResponse;
@@ -25,6 +26,7 @@ public class BookServiceGrpcController extends BookServiceGrpc.BookServiceImplBa
         this.bookService = bookService;
     }
 
+    @LogMethodCall
     @Override
     public void add(@NonNull final BookDescriptorOuterClass.BookDescriptor request,
                     @NonNull final StreamObserver<BookDescriptorOuterClass.BookAddResponse> responseObserver) {
