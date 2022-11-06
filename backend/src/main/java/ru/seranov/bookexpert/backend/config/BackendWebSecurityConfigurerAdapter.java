@@ -36,9 +36,9 @@ public class BackendWebSecurityConfigurerAdapter {
     public SecurityFilterChain filterChain(@NonNull final HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/open").permitAll()
-                        .antMatchers("/actuator").permitAll()
-                        .antMatchers("/scripts").permitAll()
+                        .antMatchers("/", "/open/**").permitAll()
+                        .antMatchers("/actuator/**").permitAll()
+                        .antMatchers("/scripts/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

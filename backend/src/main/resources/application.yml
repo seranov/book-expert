@@ -21,7 +21,7 @@ spring:
       user: postgres
       password: 0
       default-schema: book_expert
-      
+
 grpc:
   port: 6565
 
@@ -30,6 +30,10 @@ management:
     web:
       exposure:
         include: '*'
+  security:
+    enabled: true
+    role: ADMIN
+  context-path: /actuator
 
 logging:
   level:

@@ -16,7 +16,6 @@ public class BackendMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/scripts/")
                 .resourceChain(true)
                 .addResolver(new EncodedResourceResolver());
-        ;
     }
 
     public void addViewControllers(@NonNull final ViewControllerRegistry registry) {
