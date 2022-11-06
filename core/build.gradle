@@ -2,6 +2,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.springframework.boot' version '2.7.5'
     id "com.google.protobuf" version "0.9.1"
+    id 'com.github.jlouns.cpe' version '0.5.0'
     id 'book-expert-project.java-conventions'
 }
 
@@ -11,10 +12,17 @@ configurations {
     }
 }
 
+ext {
+    set('protobufVersion', "3.21.9")
+    set('grpcVersion', "1.50.2")
+}
+
+def isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
+
 dependencies {
-    implementation 'com.google.protobuf:protobuf-java:3.21.9'
-    implementation 'io.grpc:grpc-stub:1.50.2'
-    implementation 'io.grpc:grpc-protobuf:1.50.2'
+    implementation "com.google.protobuf:protobuf-java:${protobufVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
 }
 
 dependencyManagement {
@@ -32,18 +40,47 @@ jar {
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.21.9'
+        artifact = "com.google.protobuf:protoc:${protobufVersion}"
     }
     plugins {
-        grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.50.2'
+        grpc_java {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+        grpc_js {
+            path = file('./node_modules/.bin/grpc_tools_node_protoc_plugin' + (isWindows ? '.cmd' : ''))
+        }
+        ts {
+            path = file('./node_modules/.bin/protoc-gen-ts' + (isWindows ? '.cmd' : ''))
         }
     }
     generateProtoTasks {
         ofSourceSet('main').configureEach {
+            generateProto.finalizedBy copyGeneratedProto
             plugins {
-                grpc {}
+                grpc_java {}
+                grpc_js {
+                    outputSubDir = 'js'
+                    option 'grpc_js'
+                }
+                ts {
+                    option 'service=grpc-node,mode=grpc-js'
+                }
             }
+            dependsOn npmInstall
         }
     }
+}
+
+task copyGeneratedProto(type: Copy) {
+    from "$protobuf.generatedFilesBaseDir/main/ts", "$protobuf.generatedFilesBaseDir/main/js"
+    into 'build/resources/main/scripts'
+}
+
+task npmInstall(type: CrossPlatformExec) {
+    description 'Installs node dependencies'
+    inputs.file('package-lock.json').withPathSensitivity(PathSensitivity.RELATIVE)
+    outputs.dir('node_modules')
+    outputs.cacheIf { true }
+    workingDir '.'
+    commandLine 'npm', 'install'
 }
