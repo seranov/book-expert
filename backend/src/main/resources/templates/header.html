@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
+
 <div th:fragment="navigate-links">
     <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 
@@ -14,9 +15,10 @@
         <a href="react">React test</a>
     </p>
 
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
+    <form class="form-inline" action="/logout" method="post">
+        <input id="logout" type="submit" value="Sign Out"/>
     </form>
 </div>
+
 </body>
 </html>

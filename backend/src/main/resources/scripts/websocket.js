@@ -23,6 +23,10 @@ function connect() {
     });
 }
 
+function logout() {
+    window.location.href = '/logout';
+}
+
 function disconnect() {
     if (stompClient !== null) {
         stompClient.disconnect();
@@ -56,5 +60,8 @@ $(function () {
     });
     $("#send").click(function () {
         sendName();
+    });
+    $("#logout").click(function () {
+        logout();
     });
 });
