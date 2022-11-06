@@ -4,7 +4,8 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
-import ru.seranov.bookexpert.core.model.grpc.BookDescriptorOuterClass;
+import ru.seranov.bookexpert.core.model.dto.BookAddRequest;
+import ru.seranov.bookexpert.core.model.dto.BookAddResponse;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -22,19 +23,18 @@ public class BookServiceImpl implements BookService {
         return Duration.between(beginTime, LocalDateTime.now());
     }
 
-    static BookDescriptorOuterClass.BookAddResponse makeResponse(@Nullable final String id,
-                                                                 @NonNull final Duration duration) {
-        return BookDescriptorOuterClass.BookAddResponse.newBuilder()
-                .setRequestId(id)
-                .setProcessTime(duration.toMillis())
+    static BookAddResponse makeResponse(@Nullable final String id,
+                                        @NonNull final Duration duration) {
+        return BookAddResponse.builder()
+                .requestId(id)
+                .processTime(duration.toMillis())
                 .build();
     }
 
     @NonNull
     @Override
-    public BookDescriptorOuterClass.BookAddResponse add(
-            @NonNull final BookDescriptorOuterClass.BookDescriptor bookDescriptor) {
-        final Duration duration = profile(() -> processAdd(bookDescriptor.getName()));
-        return makeResponse(bookDescriptor.getId(), duration);
+    public BookAddResponse add(@NonNull final BookAddRequest request) {
+        final Duration duration = profile(() -> processAdd(request.getName()));
+        return makeResponse(request.getId(), duration);
     }
 }

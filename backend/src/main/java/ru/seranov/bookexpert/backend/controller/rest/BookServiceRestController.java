@@ -10,8 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.seranov.bookexpert.backend.model.rest.BookAddRestRequest;
+import ru.seranov.bookexpert.backend.model.rest.BookAddRestResponse;
 import ru.seranov.bookexpert.backend.service.book.BookService;
-import ru.seranov.bookexpert.core.model.grpc.BookDescriptorOuterClass;
+import ru.seranov.bookexpert.core.model.dto.BookAddRequest;
+import ru.seranov.bookexpert.core.model.dto.BookAddResponse;
+
+import static ru.seranov.bookexpert.backend.mapper.BookAddRequestMapper.BOOK_ADD_REQUEST_MAPPER;
+import static ru.seranov.bookexpert.backend.mapper.BookAddResponseMapper.BOOK_ADD_RESPONSE_REQUEST_MAPPER;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -32,8 +38,10 @@ public class BookServiceRestController {
 
 
     @PostMapping(path = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookDescriptorOuterClass.BookAddResponse> add(
-            @RequestBody @NonNull final BookDescriptorOuterClass.BookDescriptor request) {
-        return ResponseEntity.ok(bookService.add(request));
+    public ResponseEntity<BookAddRestResponse> add(@RequestBody @NonNull final BookAddRestRequest request) {
+        final BookAddRequest dto = BOOK_ADD_REQUEST_MAPPER.toDto(request);
+        final BookAddResponse response = bookService.add(dto);
+        final BookAddRestResponse responseRest = BOOK_ADD_RESPONSE_REQUEST_MAPPER.toRest(response);
+        return ResponseEntity.ok(responseRest);
     }
 }

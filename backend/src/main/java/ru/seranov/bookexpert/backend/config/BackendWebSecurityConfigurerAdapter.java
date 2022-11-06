@@ -41,6 +41,7 @@ public class BackendWebSecurityConfigurerAdapter {
                 .authorizeHttpRequests((requests) -> requests
                         .antMatchers("/", "/open/**").permitAll()
                         .antMatchers("/actuator/**").permitAll()
+                        .antMatchers("/webjars/**").permitAll()
                         .antMatchers("/scripts/**").permitAll()
                         .antMatchers("/api/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()

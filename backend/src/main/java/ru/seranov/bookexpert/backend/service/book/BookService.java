@@ -1,10 +1,10 @@
 package ru.seranov.bookexpert.backend.service.book;
 
 import lombok.NonNull;
-import ru.seranov.bookexpert.core.model.grpc.BookDescriptorOuterClass;
+import ru.seranov.bookexpert.core.model.dto.BookAddRequest;
+import ru.seranov.bookexpert.core.model.dto.BookAddResponse;
 
 public interface BookService {
     @NonNull
-    BookDescriptorOuterClass.BookAddResponse add(
-            @NonNull final BookDescriptorOuterClass.BookDescriptor bookDescriptor);
+    BookAddResponse add(@NonNull final BookAddRequest bookAddRequest);
 }
