@@ -131,6 +131,19 @@ public class VersionCascader implements Callable<Integer> {
 
     private void parseAndRegisterModule(File pomFile) throws DocumentException {
         SAXReader reader = new SAXReader();
+        
+        // Security: Disable external entity processing to prevent XXE attacks
+        try {
+            reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            reader.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            reader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        } catch (Exception e) {
+            if (verbose) {
+                System.out.println("[WARN] Could not set XML security features: " + e.getMessage());
+            }
+        }
+        
         Document document = reader.read(pomFile);
         Element root = document.getRootElement();
 
