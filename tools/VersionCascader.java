@@ -362,7 +362,7 @@ public class VersionCascader implements Callable<Integer> {
     }
 
     private void incrementPatchVersion(ModuleInfo module, String oldVersion) {
-        String newVersion = incrementVersion(module.version);
+        String newVersion = incrementVersion(oldVersion);
         
         // Update version in the document
         Element root = module.document.getRootElement();
