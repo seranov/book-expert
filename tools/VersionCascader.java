@@ -52,6 +52,18 @@ public class VersionCascader implements Callable<Integer> {
     public Integer call() {
         try {
             Path projectRoot = Paths.get(projectPath).toAbsolutePath().normalize();
+            
+            // Check if directory exists
+            if (!Files.exists(projectRoot)) {
+                System.err.println("[ERROR] Directory does not exist: " + projectRoot);
+                return 1;
+            }
+            
+            if (!Files.isDirectory(projectRoot)) {
+                System.err.println("[ERROR] Path is not a directory: " + projectRoot);
+                return 1;
+            }
+            
             System.out.println("[INFO] Scanning project at: " + projectRoot);
 
             // Step 1: Scan all pom.xml files
